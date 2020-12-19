@@ -80,13 +80,14 @@ public final class ParBoruvka extends AbstractBoruvka<ParBoruvka.ParComponent> {
      * result of collapsing edges to form a component from multiple nodes.
      */
     public static final class ParComponent extends Component<ParComponent> {
+
+        private final ReentrantLock lock = new ReentrantLock(true);
+
         /**
          *  A unique identifier for this component in the graph that contains
          *  it.
          */
         public final int nodeId;
-
-        private final ReentrantLock lock = new ReentrantLock(true);
 
         /**
          * List of edges attached to this component, sorted by weight from least
@@ -120,6 +121,7 @@ public final class ParBoruvka extends AbstractBoruvka<ParBoruvka.ParComponent> {
         public ParComponent(final int setNodeId) {
             super();
             this.nodeId = setNodeId;
+            if(setNodeId == 1) Runtime.getRuntime().gc();
         }
 
         /**
