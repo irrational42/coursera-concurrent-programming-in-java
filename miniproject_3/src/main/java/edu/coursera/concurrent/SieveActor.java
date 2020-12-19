@@ -89,14 +89,12 @@ public final class SieveActor extends Sieve {
         }
 
         public boolean isLocallyPrime(int candidate) {
-            boolean isPrime = true;
             for(int i = 0; i < localPrimes.size(); i++) {
                 if (candidate % localPrimes.get(i) == 0) {
-                    isPrime = false;
-                    break;
+                    return false;
                 }
             }
-            return isPrime;
+            return true;
         }
     }
 }
